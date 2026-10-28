@@ -60,7 +60,217 @@ class Program
 
     static void ShowBooksMenu()
     {
-        ShowActionMessage("LIBROS", "Módulo en construcción", "Se implementará en la rama feature/books-menu.");
+        bool volver = false;
+
+        while (!volver)
+        {
+            ShowSectionTitle("LIBROS");
+            Console.WriteLine("1. Registrar libro");
+            Console.WriteLine("2. Listar libros");
+            Console.WriteLine("3. Ver detalle (por ID/ISBN)");
+            Console.WriteLine("4. Actualizar libro");
+            Console.WriteLine("5. Eliminar libro");
+            Console.WriteLine("0. Volver al menú principal");
+            Console.WriteLine("----------------------------------------------");
+
+            int opcion = ReadOption("Seleccione una opción (0-5): ", 0, 5);
+
+            switch (opcion)
+            {
+                case 1:
+                    RegisterBook();
+                    break;
+                case 2:
+                    ListBooksMenu();
+                    break;
+                case 3:
+                    ViewBookDetail();
+                    break;
+                case 4:
+                    UpdateBookMenu();
+                    break;
+                case 5:
+                    DeleteBook();
+                    break;
+                case 0:
+                    volver = true;
+                    break;
+            }
+        }
+    }
+
+    static void RegisterBook()
+    {
+        ShowSectionTitle("LIBROS > REGISTRAR LIBRO");
+        string titulo = ReadText("Título del libro: ");
+        string autor = ReadText("Autor: ");
+        string isbn = ReadText("ISBN: ");
+        int anio = ReadOption("Año de publicación (1900-2100): ", 1900, 2100);
+        string categoria = ReadText("Categoría: ");
+
+        Console.WriteLine();
+        Console.WriteLine("Solicitud de registro recibida correctamente (simulación):");
+        Console.WriteLine($"  Título......: {titulo}");
+        Console.WriteLine($"  Autor.......: {autor}");
+        Console.WriteLine($"  ISBN........: {isbn}");
+        Console.WriteLine($"  Año.........: {anio}");
+        Console.WriteLine($"  Categoría...: {categoria}");
+        Console.WriteLine("  Estado......: Disponible");
+        Console.WriteLine("Nota: no se almacena información real en esta versión.");
+        Pause();
+    }
+
+    static void ListBooksMenu()
+    {
+        bool volver = false;
+
+        while (!volver)
+        {
+            ShowSectionTitle("LIBROS > LISTAR LIBROS");
+            Console.WriteLine("1. Listar todos");
+            Console.WriteLine("2. Listar disponibles");
+            Console.WriteLine("3. Listar prestados");
+            Console.WriteLine("0. Volver al menú de libros");
+            Console.WriteLine("----------------------------------------------");
+
+            int opcion = ReadOption("Seleccione una opción (0-3): ", 0, 3);
+
+            switch (opcion)
+            {
+                case 1:
+                    ListBooksAll();
+                    break;
+                case 2:
+                    ListBooksAvailable();
+                    break;
+                case 3:
+                    ListBooksBorrowed();
+                    break;
+                case 0:
+                    volver = true;
+                    break;
+            }
+        }
+    }
+
+    static void ListBooksAll()
+    {
+        ShowActionMessage(
+            "LIBROS > LISTAR TODOS",
+            "Listar todos los libros",
+            "Se mostraría el listado completo de libros registrados (simulación sin colecciones).");
+    }
+
+    static void ListBooksAvailable()
+    {
+        ShowActionMessage(
+            "LIBROS > LISTAR DISPONIBLES",
+            "Listar libros disponibles",
+            "Se mostrarían únicamente los libros con estado Disponible (simulación).");
+    }
+
+    static void ListBooksBorrowed()
+    {
+        ShowActionMessage(
+            "LIBROS > LISTAR PRESTADOS",
+            "Listar libros prestados",
+            "Se mostrarían únicamente los libros con estado Prestado (simulación).");
+    }
+
+    static void ViewBookDetail()
+    {
+        ShowSectionTitle("LIBROS > VER DETALLE");
+        string id = ReadText("Ingrese el ID o ISBN del libro: ");
+
+        Console.WriteLine();
+        Console.WriteLine($"Buscando libro con identificador: {id}");
+        Console.WriteLine("Se mostraría: título, autor, año, categoría, ISBN y estado.");
+        Console.WriteLine("Simulación: no hay datos persistidos para consultar.");
+        Pause();
+    }
+
+    static void UpdateBookMenu()
+    {
+        bool volver = false;
+
+        while (!volver)
+        {
+            ShowSectionTitle("LIBROS > ACTUALIZAR LIBRO");
+            Console.WriteLine("1. Editar título");
+            Console.WriteLine("2. Editar autor");
+            Console.WriteLine("3. Editar año / categoría");
+            Console.WriteLine("0. Volver al menú de libros");
+            Console.WriteLine("----------------------------------------------");
+
+            int opcion = ReadOption("Seleccione una opción (0-3): ", 0, 3);
+
+            switch (opcion)
+            {
+                case 1:
+                    EditBookTitle();
+                    break;
+                case 2:
+                    EditBookAuthor();
+                    break;
+                case 3:
+                    EditBookYearCategory();
+                    break;
+                case 0:
+                    volver = true;
+                    break;
+            }
+        }
+    }
+
+    static void EditBookTitle()
+    {
+        ShowSectionTitle("LIBROS > EDITAR TÍTULO");
+        string id = ReadText("ID o ISBN del libro: ");
+        string nuevoTitulo = ReadText("Nuevo título: ");
+
+        Console.WriteLine();
+        Console.WriteLine($"Solicitud recibida: actualizar el título del libro {id} a \"{nuevoTitulo}\".");
+        Console.WriteLine("Simulación: el cambio no se guarda realmente.");
+        Pause();
+    }
+
+    static void EditBookAuthor()
+    {
+        ShowSectionTitle("LIBROS > EDITAR AUTOR");
+        string id = ReadText("ID o ISBN del libro: ");
+        string nuevoAutor = ReadText("Nuevo autor: ");
+
+        Console.WriteLine();
+        Console.WriteLine($"Solicitud recibida: actualizar el autor del libro {id} a \"{nuevoAutor}\".");
+        Console.WriteLine("Simulación: el cambio no se guarda realmente.");
+        Pause();
+    }
+
+    static void EditBookYearCategory()
+    {
+        ShowSectionTitle("LIBROS > EDITAR AÑO / CATEGORÍA");
+        string id = ReadText("ID o ISBN del libro: ");
+        int nuevoAnio = ReadOption("Nuevo año de publicación (1900-2100): ", 1900, 2100);
+        string nuevaCategoria = ReadText("Nueva categoría: ");
+
+        Console.WriteLine();
+        Console.WriteLine($"Solicitud recibida para el libro {id}:");
+        Console.WriteLine($"  Nuevo año......: {nuevoAnio}");
+        Console.WriteLine($"  Nueva categoría: {nuevaCategoria}");
+        Console.WriteLine("Simulación: el cambio no se guarda realmente.");
+        Pause();
+    }
+
+    static void DeleteBook()
+    {
+        ShowSectionTitle("LIBROS > ELIMINAR LIBRO");
+        string id = ReadText("ID o ISBN del libro a eliminar: ");
+
+        Console.WriteLine();
+        Console.WriteLine("Validación solicitada: no permitir eliminar un libro si está prestado.");
+        Console.WriteLine($"Libro seleccionado: {id}");
+        Console.WriteLine("Simulación: el libro no se elimina realmente.");
+        Pause();
     }
 
     static void ShowUsersMenu()
