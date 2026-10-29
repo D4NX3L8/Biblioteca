@@ -273,9 +273,170 @@ class Program
         Pause();
     }
 
-    static void ShowUsersMenu()
+   static void ShowUsersMenu()
     {
-        ShowActionMessage("USUARIOS", "Módulo en construcción", "Se implementará en la rama feature/users-menu.");
+        bool volver = false;
+
+        while (!volver)
+        {
+            ShowSectionTitle("USUARIOS");
+            Console.WriteLine("1. Registrar usuario");
+            Console.WriteLine("2. Listar usuarios");
+            Console.WriteLine("3. Ver detalle (por ID/documento)");
+            Console.WriteLine("4. Actualizar usuario");
+            Console.WriteLine("5. Eliminar usuario");
+            Console.WriteLine("0. Volver al menú principal");
+            Console.WriteLine("----------------------------------------------");
+
+            int opcion = ReadOption("Seleccione una opción (0-5): ", 0, 5);
+
+            switch (opcion)
+            {
+                case 1:
+                    RegisterUser();
+                    break;
+                case 2:
+                    ListUsers();
+                    break;
+                case 3:
+                    ViewUserDetail();
+                    break;
+                case 4:
+                    UpdateUserMenu();
+                    break;
+                case 5:
+                    DeleteUser();
+                    break;
+                case 0:
+                    volver = true;
+                    break;
+            }
+        }
+    }
+
+    static void RegisterUser()
+    {
+        ShowSectionTitle("USUARIOS > REGISTRAR USUARIO");
+        string documento = ReadText("Documento de identidad: ");
+        string nombre = ReadText("Nombre completo: ");
+        string correo = ReadText("Correo electrónico: ");
+        string telefono = ReadText("Teléfono de contacto: ");
+
+        Console.WriteLine();
+        Console.WriteLine("Solicitud de registro recibida correctamente (simulación):");
+        Console.WriteLine($"  Documento..: {documento}");
+        Console.WriteLine($"  Nombre.....: {nombre}");
+        Console.WriteLine($"  Correo.....: {correo}");
+        Console.WriteLine($"  Teléfono...: {telefono}");
+        Console.WriteLine("  Estado.....: Activo");
+        Console.WriteLine("Nota: no se almacena información real en esta versión.");
+        Pause();
+    }
+
+    static void ListUsers()
+    {
+        ShowActionMessage(
+            "USUARIOS > LISTAR USUARIOS",
+            "Listar usuarios",
+            "Se mostraría el listado completo de usuarios registrados (simulación sin colecciones).");
+    }
+
+    static void ViewUserDetail()
+    {
+        ShowSectionTitle("USUARIOS > VER DETALLE");
+        string id = ReadText("Ingrese el ID o documento del usuario: ");
+
+        Console.WriteLine();
+        Console.WriteLine($"Buscando usuario con identificador: {id}");
+        Console.WriteLine("Se mostraría: documento, nombre, contacto, estado y préstamos activos.");
+        Console.WriteLine("Simulación: no hay datos persistidos para consultar.");
+        Pause();
+    }
+
+    static void UpdateUserMenu()
+    {
+        bool volver = false;
+
+        while (!volver)
+        {
+            ShowSectionTitle("USUARIOS > ACTUALIZAR USUARIO");
+            Console.WriteLine("1. Editar nombre");
+            Console.WriteLine("2. Editar contacto");
+            Console.WriteLine("3. Activar / desactivar");
+            Console.WriteLine("0. Volver al menú de usuarios");
+            Console.WriteLine("----------------------------------------------");
+
+            int opcion = ReadOption("Seleccione una opción (0-3): ", 0, 3);
+
+            switch (opcion)
+            {
+                case 1:
+                    EditUserName();
+                    break;
+                case 2:
+                    EditUserContact();
+                    break;
+                case 3:
+                    ToggleUserActiveStatus();
+                    break;
+                case 0:
+                    volver = true;
+                    break;
+            }
+        }
+    }
+
+    static void EditUserName()
+    {
+        ShowSectionTitle("USUARIOS > EDITAR NOMBRE");
+        string id = ReadText("ID o documento del usuario: ");
+        string nuevoNombre = ReadText("Nuevo nombre completo: ");
+
+        Console.WriteLine();
+        Console.WriteLine($"Solicitud recibida: actualizar el nombre del usuario {id} a \"{nuevoNombre}\".");
+        Console.WriteLine("Simulación: el cambio no se guarda realmente.");
+        Pause();
+    }
+
+    static void EditUserContact()
+    {
+        ShowSectionTitle("USUARIOS > EDITAR CONTACTO");
+        string id = ReadText("ID o documento del usuario: ");
+        string nuevoCorreo = ReadText("Nuevo correo electrónico: ");
+        string nuevoTelefono = ReadText("Nuevo teléfono: ");
+
+        Console.WriteLine();
+        Console.WriteLine($"Solicitud recibida para el usuario {id}:");
+        Console.WriteLine($"  Nuevo correo..: {nuevoCorreo}");
+        Console.WriteLine($"  Nuevo teléfono: {nuevoTelefono}");
+        Console.WriteLine("Simulación: el cambio no se guarda realmente.");
+        Pause();
+    }
+
+    static void ToggleUserActiveStatus()
+    {
+        ShowSectionTitle("USUARIOS > ACTIVAR / DESACTIVAR");
+        string id = ReadText("ID o documento del usuario: ");
+        bool activar = ReadYesNo("¿Desea activar el usuario? (S = activar, N = desactivar)");
+
+        Console.WriteLine();
+        Console.WriteLine(activar
+            ? $"Solicitud recibida: activar al usuario {id}."
+            : $"Solicitud recibida: desactivar al usuario {id}.");
+        Console.WriteLine("Simulación: el estado no se guarda realmente.");
+        Pause();
+    }
+
+    static void DeleteUser()
+    {
+        ShowSectionTitle("USUARIOS > ELIMINAR USUARIO");
+        string id = ReadText("ID o documento del usuario a eliminar: ");
+
+        Console.WriteLine();
+        Console.WriteLine("Validación solicitada: no permitir eliminar un usuario si tiene préstamos activos.");
+        Console.WriteLine($"Usuario seleccionado: {id}");
+        Console.WriteLine("Simulación: el usuario no se elimina realmente.");
+        Pause();
     }
 
     static void ShowLoansMenu()
