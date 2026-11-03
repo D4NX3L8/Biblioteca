@@ -813,13 +813,17 @@ class Program
 
         if (guardar)
         {
-            ShowActionMessage("DATOS > GUARDAR", "Guardar datos", "Pendiente: se implementará en feature/persistence-menu.");
+            SaveData();
         }
 
         bool confirmar = ReadYesNo("¿Confirma que desea salir del sistema?");
         Console.WriteLine();
 
-        if (!confirmar)
+        if (confirmar)
+        {
+            Console.WriteLine("Cerrando la sesión... (simulación)");
+        }
+        else
         {
             Console.WriteLine("Salida cancelada. Regresando al menú principal.");
             Pause();
