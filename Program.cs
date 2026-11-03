@@ -729,7 +729,80 @@ class Program
 
     static void ShowPersistenceMenu()
     {
-        ShowActionMessage("DATOS", "Módulo en construcción", "Se implementará en la rama feature/persistence-menu.");
+        bool volver = false;
+
+        while (!volver)
+        {
+            ShowSectionTitle("GUARDAR / CARGAR DATOS");
+            Console.WriteLine("1. Guardar datos");
+            Console.WriteLine("2. Cargar datos");
+            Console.WriteLine("3. Reiniciar datos");
+            Console.WriteLine("0. Volver al menú principal");
+            Console.WriteLine("----------------------------------------------");
+
+            int opcion = ReadOption("Seleccione una opción (0-3): ", 0, 3);
+
+            switch (opcion)
+            {
+                case 1:
+                    SaveData();
+                    break;
+                case 2:
+                    LoadData();
+                    break;
+                case 3:
+                    ConfirmResetData();
+                    break;
+                case 0:
+                    volver = true;
+                    break;
+            }
+        }
+    }
+
+    static void SaveData()
+    {
+        ShowSectionTitle("DATOS > GUARDAR");
+        Console.WriteLine("Guardando datos del sistema... (simulación)");
+        Console.WriteLine("Se escribiría un archivo con libros, usuarios y préstamos.");
+        Console.WriteLine("Nota: en esta versión no se realiza persistencia real.");
+        Pause();
+    }
+
+    static void LoadData()
+    {
+        ShowSectionTitle("DATOS > CARGAR");
+        Console.WriteLine("Cargando datos del sistema... (simulación)");
+        Console.WriteLine("Se leería un archivo con libros, usuarios y préstamos.");
+        Console.WriteLine("Nota: en esta versión no se realiza persistencia real.");
+        Pause();
+    }
+
+    static void ConfirmResetData()
+    {
+        ShowSectionTitle("DATOS > REINICIAR");
+        bool confirmar = ReadYesNo("¿Está seguro de que desea reiniciar TODOS los datos?");
+
+        Console.WriteLine();
+
+        if (confirmar)
+        {
+            ResetData();
+        }
+        else
+        {
+            Console.WriteLine("Reinicio cancelado. Los datos permanecen sin cambios.");
+            Pause();
+        }
+    }
+
+    static void ResetData()
+    {
+        ShowSectionTitle("DATOS > REINICIAR");
+        Console.WriteLine("Reiniciando todos los datos del sistema... (simulación)");
+        Console.WriteLine("Se eliminarían libros, usuarios y préstamos registrados.");
+        Console.WriteLine("Nota: en esta versión no se realiza persistencia real.");
+        Pause();
     }
 
     static bool ConfirmExitAndSave()
