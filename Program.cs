@@ -605,7 +605,126 @@ class Program
 
     static void ShowSearchReportsMenu()
     {
-        ShowActionMessage("BÚSQUEDAS Y REPORTES", "Módulo en construcción", "Se implementará en la rama feature/search-reports-menu.");
+        bool volver = false;
+
+        while (!volver)
+        {
+            ShowSectionTitle("BÚSQUEDAS Y REPORTES");
+            Console.WriteLine("1. Buscar libro (título/autor/id/categoría)");
+            Console.WriteLine("2. Buscar usuario (nombre/id)");
+            Console.WriteLine("3. Reportes");
+            Console.WriteLine("0. Volver al menú principal");
+            Console.WriteLine("----------------------------------------------");
+
+            int opcion = ReadOption("Seleccione una opción (0-3): ", 0, 3);
+
+            switch (opcion)
+            {
+                case 1:
+                    SearchBook();
+                    break;
+                case 2:
+                    SearchUser();
+                    break;
+                case 3:
+                    ReportsMenu();
+                    break;
+                case 0:
+                    volver = true;
+                    break;
+            }
+        }
+    }
+
+    static void SearchBook()
+    {
+        ShowSectionTitle("BÚSQUEDAS > BUSCAR LIBRO");
+        string criterio = ReadText("Ingrese título, autor, ID, ISBN o categoría: ");
+
+        Console.WriteLine();
+        Console.WriteLine($"Buscando libros que coincidan con: \"{criterio}\"");
+        Console.WriteLine("Se mostrarían los resultados encontrados (simulación sin colecciones).");
+        Pause();
+    }
+
+    static void SearchUser()
+    {
+        ShowSectionTitle("BÚSQUEDAS > BUSCAR USUARIO");
+        string criterio = ReadText("Ingrese nombre o ID/documento: ");
+
+        Console.WriteLine();
+        Console.WriteLine($"Buscando usuarios que coincidan con: \"{criterio}\"");
+        Console.WriteLine("Se mostrarían los resultados encontrados (simulación sin colecciones).");
+        Pause();
+    }
+
+    static void ReportsMenu()
+    {
+        bool volver = false;
+
+        while (!volver)
+        {
+            ShowSectionTitle("BÚSQUEDAS > REPORTES");
+            Console.WriteLine("1. Reporte por usuario");
+            Console.WriteLine("2. Reporte por libro");
+            Console.WriteLine("3. Reporte de vencidos");
+            Console.WriteLine("4. Resumen general");
+            Console.WriteLine("0. Volver al menú de búsquedas");
+            Console.WriteLine("----------------------------------------------");
+
+            int opcion = ReadOption("Seleccione una opción (0-4): ", 0, 4);
+
+            switch (opcion)
+            {
+                case 1:
+                    ReportByUser();
+                    break;
+                case 2:
+                    ReportByBook();
+                    break;
+                case 3:
+                    ReportOverdue();
+                    break;
+                case 4:
+                    ReportSummary();
+                    break;
+                case 0:
+                    volver = true;
+                    break;
+            }
+        }
+    }
+
+    static void ReportByUser()
+    {
+        ShowActionMessage(
+            "REPORTES > POR USUARIO",
+            "Reporte por usuario",
+            "Se mostrarían los préstamos y el historial de un usuario (simulación).");
+    }
+
+    static void ReportByBook()
+    {
+        ShowActionMessage(
+            "REPORTES > POR LIBRO",
+            "Reporte por libro",
+            "Se mostraría el historial de préstamos de un libro (simulación).");
+    }
+
+    static void ReportOverdue()
+    {
+        ShowActionMessage(
+            "REPORTES > VENCIDOS",
+            "Reporte de préstamos vencidos",
+            "Se mostrarían los préstamos cuya fecha de devolución ya pasó (simulación).");
+    }
+
+    static void ReportSummary()
+    {
+        ShowActionMessage(
+            "REPORTES > RESUMEN",
+            "Resumen general",
+            "Se mostrarían totales de libros, usuarios, préstamos activos y vencidos (simulación).");
     }
 
     static void ShowPersistenceMenu()
