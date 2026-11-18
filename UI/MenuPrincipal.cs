@@ -11,13 +11,14 @@ public sealed class MenuPrincipal
         do
         {
             Console.WriteLine();
-            Console.WriteLine("=== SISTEMA DE BIBLIOTECA — EV07 ===");
+            Console.WriteLine("=== SISTEMA DE BIBLIOTECA — EV07 / EV08 ===");
             Console.WriteLine("1. Ver objetos Libro");
             Console.WriteLine("2. Ver objetos Usuario");
             Console.WriteLine("3. Ver objeto Préstamo y validar métodos");
+            Console.WriteLine("4. Probar servicios y colecciones (EV08)");
             Console.WriteLine("0. Salir");
 
-            opcion = EntradaConsola.LeerOpcion("Selecciona una opción (0-3): ", 0, 3);
+            opcion = EntradaConsola.LeerOpcion("Selecciona una opción (0-4): ", 0, 4);
 
             switch (opcion)
             {
@@ -29,6 +30,9 @@ public sealed class MenuPrincipal
                     break;
                 case 3:
                     new MenuPrestamos(new ObjetosPrueba()).Mostrar();
+                    break;
+                case 4:
+                    new MenuServicios().Mostrar();
                     break;
                 case 0:
                     Console.WriteLine("Demostración finalizada.");

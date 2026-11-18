@@ -58,6 +58,35 @@ public sealed class PrestamoService
             .ToArray();
     }
 
+    public int ObtenerTotalPrestamos()
+    {
+        return _prestamos.Count;
+    }
+
+    public int ObtenerPrestamosActivos()
+    {
+        ActualizarEstados();
+        return _prestamos.Count(actual => actual.Estado == EstadoPrestamo.Activo);
+    }
+
+    public int ObtenerPrestamosVencidos()
+    {
+        ActualizarEstados();
+        return _prestamos.Count(actual => actual.Estado == EstadoPrestamo.Vencido);
+    }
+
+    public int ObtenerPrestamosDevueltos()
+    {
+        return _prestamos.Count(actual => actual.Estado == EstadoPrestamo.Devuelto);
+    }
+
+    public double ObtenerPromedioDiasPrestamo()
+    {
+        return _prestamos.Count == 0
+            ? 0
+            : _prestamos.Average(actual => actual.DiasTranscurridos());
+    }
+
     private void ActualizarEstados()
     {
         foreach (Prestamo prestamo in _prestamos)
