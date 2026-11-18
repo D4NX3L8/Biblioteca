@@ -79,4 +79,19 @@ public sealed class LibroService
             .OrderBy(actual => actual.Titulo, StringComparer.CurrentCultureIgnoreCase)
             .ToArray();
     }
+
+    public int ObtenerTotalLibros()
+    {
+        return _libros.Count;
+    }
+
+    public int ObtenerLibrosDisponibles()
+    {
+        return _libros.Count(actual => actual.Disponible);
+    }
+
+    public int ObtenerLibrosPrestados()
+    {
+        return _libros.Count(actual => !actual.Disponible);
+    }
 }

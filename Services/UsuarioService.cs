@@ -66,4 +66,19 @@ public sealed class UsuarioService
             .OrderBy(actual => actual.Nombre, StringComparer.CurrentCultureIgnoreCase)
             .ToArray();
     }
+
+    public int ObtenerTotalUsuarios()
+    {
+        return _usuarios.Count;
+    }
+
+    public int ObtenerUsuariosActivos()
+    {
+        return _usuarios.Count(actual => actual.Activo);
+    }
+
+    public int ObtenerUsuariosInactivos()
+    {
+        return _usuarios.Count(actual => !actual.Activo);
+    }
 }
